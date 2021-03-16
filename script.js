@@ -71,14 +71,15 @@ function fiveDayForecast(lat, lon) {
         .then(function (data){
             console.log(data);
 
-            //UV Index and box/badge coloring
+            //UV Index
             uvIndex.text(data.current.uvi);
 
-            if (data.current.uvi <= 3) {
+            //Changes UV badge color based on UV Index number
+            if (data.current.uvi <= 4) {
                 uvIndex.addClass('badge badge-success');
             }
 
-            else if (data.current.uvi >= 4 && data.current.uvi <= 7) {
+            else if (data.current.uvi > 4 && data.current.uvi <= 7) {
                 uvIndex.removeClass('badge badge-success');
                 uvIndex.addClass('badge badge-warning');
             }
@@ -116,11 +117,16 @@ function fiveDayForecast(lat, lon) {
 
                 forecastDate.text(forecastDateString);
                 forecastIcon.attr("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
-                forecastTemp.text("Temperature: " + data.daily[i].temp.day + String.fromCharCode(8457));
+                forecastTemp.text("Temp: " + data.daily[i].temp.day + String.fromCharCode(8457));
                 forecastHumidity.text("Humidity: " + data.daily[i].humidity + "%");
+
+                // If there are 5 cards on page then stop loop
+                if (i === 5)
+                    break;
+                
             }
 
-        })
+        });
 }
 
 //On click of the search btn take the value and send the input to currentWeather function

@@ -70,7 +70,24 @@ function fiveDayForecast(lat, lon) {
         })
         .then(function (data){
             console.log(data);
+
+            //UV Index and box/badge coloring
             uvIndex.text(data.current.uvi);
+
+            if (data.current.uvi <= 3) {
+                uvIndex.addClass('badge badge-success');
+            }
+
+            else if (data.current.uvi >= 4 && data.current.uvi <= 7) {
+                uvIndex.removeClass('badge badge-success');
+                uvIndex.addClass('badge badge-warning');
+            }
+
+            else {
+                uvIndex.removeClass('badge badge-success');
+                uvIndex.removeClass('badge badge-warning');
+                uvIndex.addClass('badge badge-danger');
+            }
             //Create Cards
             for (let i = 1; i < data.daily.length; i++) {
 
@@ -107,7 +124,9 @@ function fiveDayForecast(lat, lon) {
 }
 
 //On click of the search btn take the value and send the input to currentWeather function
-searchCityBtn.on('click', function () {
+searchCityBtn.on('click', function (event) {
+    event.preventDefault();
+    
     var input = searchCity.val()
     console.log(input); 
     currentWeather(input);

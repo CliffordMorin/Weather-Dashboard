@@ -92,7 +92,12 @@ function fiveDayForecast(lat, lon) {
             //Create Cards
             for (let i = 1; i < data.daily.length; i++) {
 
-                var forecastDateString = moment(data.daily[i].dt_txt).format('L');
+                //Date for each card 
+                var date = new Date(data.daily[i].dt * 1000);  //take the dt and convert it from univex code to a readable date info 
+                console.log(date);
+                var formatDate = moment(date).format('L'); //format the date to month/day/year 
+                console.log(formatDate);
+                var forecastDateString = formatDate
                 console.log(forecastDateString);
 
                 //Five Day Forecast El
@@ -106,6 +111,7 @@ function fiveDayForecast(lat, lon) {
                 var forecastTemp = $("<p class='card-text mb-0'>");
                 var forecastHumidity = $("<p class='card-text mb-0'>");
 
+                //create each card
                 fiveDayForecast.append(forecastCol);
                 forecastCol.append(forecastCard);
                 forecastCard.append(forecastCardBody);
@@ -115,6 +121,7 @@ function fiveDayForecast(lat, lon) {
                 forecastCardBody.append(forecastTemp);
                 forecastCardBody.append(forecastHumidity);
 
+                //add info to each card
                 forecastDate.text(forecastDateString);
                 forecastIcon.attr("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
                 forecastTemp.text("Temp: " + data.daily[i].temp.day + String.fromCharCode(8457));
@@ -130,12 +137,12 @@ function fiveDayForecast(lat, lon) {
 }
 
 //On click of the search btn take the value and send the input to currentWeather function
-searchCityBtn.on('click', function (event) {
-    event.preventDefault();
+searchCityBtn.on('click', function () {
     
     var input = searchCity.val()
     console.log(input); 
     currentWeather(input);
+    // window.location.href = './index.html'
 })
 
 });

@@ -5,6 +5,7 @@ var searchCity = $('#search-city');
 var searchCityBtn = $('#search-city-btn');
 var searchHistoryList = $('#search-history');
 var clearHistoryBtn = $('#clear-history-btn');
+var cityHistoryBtn = $('#city-btn');
 
 //Current Weather Content El
 var currentWeatherContent = $('#current-weather-content');
@@ -158,6 +159,21 @@ searchCityBtn.on('click', function () {
     // window.location.href = './index.html'
 });
 
+//on hit of enter key take the value and send the input to currentWeather, searchHistory and clear the input field.
+//grab id from form
+$('#form-search').on('submit', function () {
+    // e.preventDefault(); //don't need this, it prevents the search page from going to index.html
+    
+    //grabs value entered in search bar
+    var input = searchCity.val().trim()
+    console.log(input); 
+
+    currentWeather(input);
+    searchHistory(input);
+    searchCity.val("");
+    // window.location.href = './index.html'
+});
+
 //Search history 
 function searchHistory(input) {
 
@@ -195,10 +211,18 @@ function listArray() {
     searchHistoryList.empty();
 
     cityList.forEach(function(city){
-        var searchHistoryItem = $('<li class="list-group-item city-btn">');
+        var searchHistoryItem = $('<li type="button" class="list-group-item btn btn-warning btn-sm" id="city-btn">');
         searchHistoryItem.attr("data-value", city);
         searchHistoryItem.text(city);
         searchHistoryList.prepend(searchHistoryItem);
+        //click history item to take you to that search
+        searchHistoryItem.on('click', function () {
+            var input = searchHistoryItem.text()
+            console.log(input); 
+        
+            currentWeather(input);
+            searchHistory(input);
+        });
     });
      //save input to local storage
      localStorage.setItem("cities",JSON.stringify(cityList));

@@ -18,6 +18,8 @@ var uvIndex = $('#uv-index');
 // My Key to Get access to the OpenWeather API 
 var apiKey = "629c5fc75bc1a656af7ff2d9281035d7";
 
+//city list array for search history
+var cityList = [];
 
 //Document Ready
 
@@ -26,6 +28,10 @@ $(document).ready(function () {
     // Find current date and display in title
 var currentDate = moment().format('L');
 $("#current-date").text("(" + currentDate + ")");
+
+//check if search history exists when page loads
+getHistory();
+
 
 //Current Weather API fetch function
 function currentWeather(city) {
@@ -45,7 +51,7 @@ function currentWeather(city) {
             //sends latitude and longitude data to five day forecast function
             fiveDayForecast(data.coord.lat, data.coord.lon);
             //change text to respective data call
-            currentCity.text(data.name);
+            currentCity.text(data.name + " ");
             currentTemp.text(data.main.temp);
             currentHumidity.text(data.main.humidity + "%");
             currentWindSpeed.text(data.wind.speed + " MPH");
@@ -89,11 +95,13 @@ function fiveDayForecast(lat, lon) {
                 uvIndex.removeClass('badge badge-warning');
                 uvIndex.addClass('badge badge-danger');
             }
+
+            $('#five-day-forecast').empty();
             //Create Cards
             for (let i = 1; i < data.daily.length; i++) {
 
                 //Date for each card 
-                var date = new Date(data.daily[i].dt * 1000);  //take the dt and convert it from univex code to a readable date info 
+                var date = new Date(data.daily[i].dt * 1000);  //take the dt and convert it from milliseconds to a readable date info 
                 console.log(date);
                 var formatDate = moment(date).format('L'); //format the date to month/day/year 
                 console.log(formatDate);
@@ -136,13 +144,87 @@ function fiveDayForecast(lat, lon) {
         });
 }
 
-//On click of the search btn take the value and send the input to currentWeather function
+//On click of the search btn take the value and send the input to currentWeather, searchHistory and clear the input field.
 searchCityBtn.on('click', function () {
+    // e.preventDefault(); //don't need this, it prevents the search page from going to index.html
     
-    var input = searchCity.val()
+    //grabs value entered in search bar
+    var input = searchCity.val().trim()
     console.log(input); 
+
     currentWeather(input);
+    searchHistory(input);
+    searchCity.val("");
     // window.location.href = './index.html'
-})
+});
+
+//Search history 
+function searchHistory(input) {
+
+    // console.log(input);
+    
+    //if there is input in the search bar
+    if(input){
+
+        //put value of input into cityList array
+        //if it is a new input
+        if(cityList.indexOf(input) === -1){
+            cityList.push(input)
+
+            //run this function to list all the cities in the local storage/ history
+            listArray();
+        }
+        //if not a new input
+        else {
+            //then remove the existing input from the array
+            var removeIndex = cityList.indexOf(input);
+            cityList.splice(removeIndex, 1);
+
+            //push the input to the array
+            cityList.push(input);
+
+            //run this function to list all the cities in the local storage/ history so
+            //the old entry is at the top of the search history list
+            listArray();
+        }
+    }
+}
+
+function listArray() {
+
+    searchHistoryList.empty();
+
+    cityList.forEach(function(city){
+        var searchHistoryItem = $('<li class="list-group-item city-btn">');
+        searchHistoryItem.attr("data-value", city);
+        searchHistoryItem.text(city);
+        searchHistoryList.prepend(searchHistoryItem);
+    });
+     //save input to local storage
+     localStorage.setItem("cities",JSON.stringify(cityList));
+
+    //  var storageItem = JSON.parse(localStorage.getItem("input"));
+    //  console.log(storageItem)
+}
+
+function getHistory() {
+    if (localStorage.getItem("cities")) {
+        cityList = JSON.parse(localStorage.getItem("cities"));
+        var lastIndex = cityList.length - 1;
+        
+        listArray();
+
+        if (cityList.length !== 0) {
+            currentWeather(cityList[lastIndex]);
+        }
+    }
+}
+
+clearHistoryBtn.on("click", function () {
+    localStorage.clear();
+    cityList = [];
+    listArray();
+    // searchHistoryList.remove().children();
+});
 
 });

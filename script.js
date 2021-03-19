@@ -241,6 +241,11 @@ function getHistory() {
         if (cityList.length !== 0) {
             currentWeather(cityList[lastIndex]);
         }
+
+        else {
+            //if there is no history make default city Philadelphia
+            currentWeather("Philadelphia");
+        }
     }
 }
 

@@ -111,7 +111,7 @@ function fiveDayForecast(lat, lon) {
 
                 //Five Day Forecast El
                 var fiveDayForecast = $('#five-day-forecast');
-                var forecastCol = $("<div class='col-12 col-md-6 col-lg forecast-day mb-3'>");
+                var forecastCol = $("<div class='col-12 col-md-6 col-lg mb-3'>");
                 var forecastCard = $("<div class='card text-white bg-primary'>");
                 var forecastCardBody = $("<div class='card-body'>");
 

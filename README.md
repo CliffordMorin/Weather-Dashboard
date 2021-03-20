@@ -1,11 +1,5 @@
 # Weather-Dashboard
 
-## Your Task
-
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that provides basic setup and usage instructions. You will use `localStorage` to store any persistent data.
-
 ## User Story
 
 ```
@@ -30,61 +24,22 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
-## Mock-Up
+## How this app works
 
-The following image shows the web application's appearance and functionality:
+```
+This weather dashboard application was made using html, css, javascript (jQuery), third party API's and moment.js. The third party API used to get data about the weather was One call API and Current Weather Data API from http://openweathermap.org. Incorporated functions are as follows:
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./Assets/06-server-side-apis-homework-demo.png)
+* Search bar that saves search history to local storage and adds it to a search history list with a clear button which is clickable and will take you to that previously searched city.
 
-## Grading Requirements
+* Current weather of searched city which contains a UV index badge which changes color based on if the UV index is safe, moderate, severe.
 
-This homework is graded based on the following criteria: 
+* Five day forecast which is 5 cards generated in a for loop which reset with every new search.
 
-### Technical Acceptance Criteria: 40%
+* The default city is Philadelphia, in order to show no blank sections when there is no previously searches or local storage is empty. 
+```
 
-* Satisfies all of the above acceptance criteria plus the following:
+![Demo](Images/demo.gif)
 
-    * Uses the OpenWeather API to retrieve weather data.
+[Site Link](https://cliffordmorin.github.io/Weather-Dashboard/)
 
-    * Uses `localStorage` to store persistent data.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-- - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+[![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=0D76A8)](https://www.linkedin.com/in/morin-clifford-129888a9/)

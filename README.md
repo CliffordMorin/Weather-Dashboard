@@ -1,5 +1,7 @@
 # Weather-Dashboard
 
+[![MIT](https://img.shields.io/badge/license-MIT-green?style=plastic)](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
+
 ## User Story
 
 ```
@@ -37,9 +39,18 @@ This weather dashboard application was made using html, css, javascript (jQuery)
 
 * The default city is Philadelphia, in order to show no blank sections when there is no previously searches or local storage is empty. 
 ```
+## Demo
 
 ![Demo](Images/demo.gif)
 
-[Site Link](https://cliffordmorin.github.io/Weather-Dashboard/)
+## Links
 
-[![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=0D76A8)](https://www.linkedin.com/in/morin-clifford-129888a9/)
+* Application URL:[Site Link](https://cliffordmorin.github.io/Weather-Dashboard/)
+
+## Questions
+
+ Feel free to reach me at cemorin21@gmail.com with any question regarding this project!
+
+ [![LinkedIn](https://img.shields.io/badge/My%20LinkedIn-Click%20Me!-grey?style=plastic&logo=LinkedIn&labelColor=blue)](https://www.linkedin.com/in/morin-clifford-129888a9/)
+
+ [![GitHub](https://img.shields.io/badge/My%20GitHub-Click%20Me!-blueviolet?style=plastic&logo=GitHub)](https://github.com/CliffordMorin)
